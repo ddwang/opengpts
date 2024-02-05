@@ -25,6 +25,8 @@ from langchain_openai import OpenAIEmbeddings
 from app.ingest import ingest_blob
 from app.parsing import MIMETYPE_BASED_PARSER
 
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
 
 def _guess_mimetype(file_bytes: bytes) -> str:
     """Guess the mime-type of a file."""
@@ -61,7 +63,6 @@ class IngestRunnable(RunnableSerializable[BinaryIO, List[str]]):
     """Vectorstore to ingest into."""
     assistant_id: Optional[str]
     """Ingested documents will be associated with this assistant id.
-    
     The assistant ID is used as the namespace, and is filtered on at query time.
     """
 
